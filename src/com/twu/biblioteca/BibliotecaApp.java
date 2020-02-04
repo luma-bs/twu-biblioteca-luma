@@ -14,6 +14,6 @@ public class BibliotecaApp {
 
         System.out.println(bibliotecaView.showWelcomeMessage());
 
-        bibliotecaView.showBookList().forEach(book -> System.out.println(book));
+        bibliotecaView.showMenuOptions().forEach(option -> System.out.println(option));
     }
 }
