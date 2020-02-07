@@ -44,4 +44,11 @@ public class BibliotecaAppTest {
 
         verify(bibliotecaView, times(1)).checkoutBook();
     }
+
+    @Test
+    public void shouldCheckinABookWhenSelected(){
+        bibliotecaApp.selectMenuOption(3);
+
+        verify(bibliotecaView, times(1)).returnBook();;
+    }
 }

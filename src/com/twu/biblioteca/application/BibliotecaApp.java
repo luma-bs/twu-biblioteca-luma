@@ -40,6 +40,8 @@ public class BibliotecaApp {
                     break;
             case 2: bibliotecaView.checkoutBook();
                     break;
+            case 3: bibliotecaView.returnBook();
+                    break;
             default: System.out.println(bibliotecaView.showInvalidOption());
                     break;
         }

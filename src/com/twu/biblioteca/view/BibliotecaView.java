@@ -26,6 +26,7 @@ public class BibliotecaView {
         menuOptions.add("Please select an option:");
         menuOptions.add("1. List of Books");
         menuOptions.add("2. Checkout a book");
+        menuOptions.add("3. Return a book");
         menuOptions.add("0. Quit");
 
         return menuOptions;
@@ -34,7 +35,7 @@ public class BibliotecaView {
     public List<String> showBooks(){
         List<String> books = new ArrayList<String>();
 
-        bookService.getAll().forEach(book -> books.add(MessageFormat
+        bookService.getAllAvailableBooks().forEach(book -> books.add(MessageFormat
                 .format("Title: {0} | Author: {1} | Publication Year: {2}", book.title, book.author, book.publicationYear)));
 
         return books;
@@ -72,5 +73,19 @@ public class BibliotecaView {
         }while(book == null);
 
         System.out.println(showSuccessCheckoutMessage());
+    }
+
+    public void returnBook(){
+        Book book = null;
+
+        do {
+            System.out.println("Please enter the valid name of the book you want to return");
+
+            Scanner scanner = new Scanner(System.in);
+            String bookName = scanner.nextLine();
+
+            book = bookService.returnBook(bookName);
+
+        }while(book == null);
     }
 }

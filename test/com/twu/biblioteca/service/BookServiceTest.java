@@ -33,7 +33,7 @@ public class BookServiceTest {
 
         when(bookRepository.getAll()).thenReturn(allBooks);
 
-        List<Book> actual = bookService.getAll();
+        List<Book> actual = bookService.getAllAvailableBooks();
 
         assertFalse(actual.isEmpty());
         assertFalse(actual.contains(checkedOutBook));
@@ -57,13 +57,60 @@ public class BookServiceTest {
     }
 
     @Test
-    public void shouldReturnNullWhenBookIsNotValidToCheckout(){
+    public void shouldReturnNullWhenBookIsNotValidToChangeCheckout(){
         List<Book> allBooks = new ArrayList<Book>();
-        Book checkedOutBook = new Book("Twilight", "Stephani Meyer", "2001", true);
+        Book bookCheckedout = new Book("Twilight", "Stephani Meyer", "2001", true);
+        allBooks.add(bookCheckedout);
 
         when(bookRepository.getAll()).thenReturn(allBooks);
 
         Book actual = bookService.checkoutBook("Twilight");
+
+        assertNull(actual);
+    }
+
+    @Test
+    public void shouldGetAllCheckedOutBooks(){
+        List<Book> allBooks = new ArrayList<Book>();
+        Book checkedinBook = new Book("Twilight", "Stephani Meyer", "2001", false);
+
+        allBooks.add(new Book("Harry Potter and the Chamber of Secrets", "J. K. Rolling", "1997", true));
+        allBooks.add(checkedinBook);
+
+        when(bookRepository.getAll()).thenReturn(allBooks);
+
+        List<Book> actual = bookService.getAllBooksCheckedOut();
+
+        assertFalse(actual.isEmpty());
+        assertFalse(actual.contains(checkedinBook));
+    }
+
+    @Test
+    public void shouldReturnABook(){
+        List<Book> allBooks = new ArrayList<Book>();
+        Book book = new Book("Twilight", "Stephani Meyer", "2001", true);
+        Book expectedResult = new Book("Twilight", "Stephani Meyer", "2001", false);
+        allBooks.add(book);
+
+        when(bookRepository.getAll()).thenReturn(allBooks);
+
+        when(bookRepository.toggleCheckout(book)).thenReturn(expectedResult);
+
+        Book actual = bookService.returnBook("Twilight");
+
+        assertNotNull(actual);
+        assertFalse(actual.isCheckedOut);
+    }
+
+    @Test
+    public void shouldReturnNullWhenBookIsNotValidToChangeCheckin(){
+        List<Book> allBooks = new ArrayList<Book>();
+        Book returnedBook = new Book("Twilight", "Stephani Meyer", "2001", false);
+        allBooks.add(returnedBook);
+
+        when(bookRepository.getAll()).thenReturn(allBooks);
+
+        Book actual = bookService.returnBook("Twilight");
 
         assertNull(actual);
     }
