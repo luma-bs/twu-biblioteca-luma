@@ -79,6 +79,10 @@ public class BibliotecaView {
         return "Thank you for returning the book.";
     }
 
+    public String showInvalidBookReturnMessage(){
+        return "That is not a valid book to return.";
+    }
+
     public void returnBook(){
         Book book = null;
 
@@ -90,6 +94,7 @@ public class BibliotecaView {
 
             book = bookService.returnBook(bookName);
 
+            if(book == null) System.out.println(showInvalidBookReturnMessage());
         }while(book == null);
 
         System.out.println(showSuccessfulReturnMessage());

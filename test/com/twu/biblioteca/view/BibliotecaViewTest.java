@@ -68,4 +68,10 @@ public class BibliotecaViewTest {
         String returnMessage = "Thank you for returning the book.";
         assertEquals(returnMessage, bibliotecaView.showSuccessfulReturnMessage());
     }
+
+    @Test
+    public void shouldShowInvalidBookReturn(){
+        String invalidBookReturnMessage = "That is not a valid book to return.";
+        assertEquals(invalidBookReturnMessage, bibliotecaView.showInvalidBookReturnMessage());
+    }
 }
