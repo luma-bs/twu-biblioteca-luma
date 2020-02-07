@@ -62,4 +62,10 @@ public class BibliotecaViewTest {
         String invalidheckout = "Sorry, that book is not available.";
         assertEquals(invalidheckout, bibliotecaView.showInvalidCheckoutMessage());
     }
+
+    @Test
+    public void shouldShowSuccessfulReturnMessage(){
+        String returnMessage = "Thank you for returning the book.";
+        assertEquals(returnMessage, bibliotecaView.showSuccessfulReturnMessage());
+    }
 }

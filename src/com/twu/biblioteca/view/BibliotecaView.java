@@ -75,6 +75,10 @@ public class BibliotecaView {
         System.out.println(showSuccessCheckoutMessage());
     }
 
+    public String showSuccessfulReturnMessage(){
+        return "Thank you for returning the book.";
+    }
+
     public void returnBook(){
         Book book = null;
 
@@ -87,5 +91,7 @@ public class BibliotecaView {
             book = bookService.returnBook(bookName);
 
         }while(book == null);
+
+        System.out.println(showSuccessfulReturnMessage());
     }
 }
