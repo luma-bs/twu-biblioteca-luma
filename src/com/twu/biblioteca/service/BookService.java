@@ -2,6 +2,8 @@ package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.model.Book;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookService {
@@ -13,7 +15,25 @@ public class BookService {
     }
 
     public List<Book> getAll(){
-        return bookRepository.getAll();
+        List<Book> availableBooks = new ArrayList<Book>();
+
+        bookRepository.getAll().forEach(book -> {
+            if(!book.isCheckedOut){
+                availableBooks.add(book);
+            }
+        });
+
+        return availableBooks;
     }
 
+    public Book checkoutBook(String bookName){
+        Book checkoutedBook = getAll().stream()
+                .filter(book -> book.title.equals(bookName))
+                .findAny()
+                .orElse(null);
+
+        if(checkoutedBook != null) checkoutedBook = bookRepository.toggleCheckout(checkoutedBook);
+
+        return checkoutedBook;
+    }
 }

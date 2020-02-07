@@ -10,11 +10,16 @@ public class BookRepository {
     private List<Book> books = new ArrayList<Book>();
 
     public BookRepository(){
-        this.books.add(new Book("A Court of Thorns and Roses", "Sarah J. Mass", "2015"));
-        this.books.add(new Book("Throne of Glass", "Sarah J. Mass","2012"));
+        this.books.add(new Book("A Court of Thorns and Roses", "Sarah J. Mass", "2015",false));
+        this.books.add(new Book("Throne of Glass", "Sarah J. Mass","2012", false));
     }
 
     public List<Book> getAll(){
         return books;
+    }
+
+    public Book toggleCheckout(Book book){
+        book.isCheckedOut = !book.isCheckedOut;
+        return book;
     }
 }

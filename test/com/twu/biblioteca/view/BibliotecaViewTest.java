@@ -5,6 +5,7 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertEquals;
 
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.BookRepositoryTest;
 import com.twu.biblioteca.service.BookService;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +16,13 @@ import java.util.List;
 public class BibliotecaViewTest {
 
     private BibliotecaView bibliotecaView;
+    private BookRepository bookRepository;
+    private BookService bookService;
 
     @Before
     public  void setup() {
-        BookRepository bookRepository = new BookRepository();
-        BookService bookService = new BookService(bookRepository);
+        bookRepository = new BookRepository();
+        bookService = new BookService(bookRepository);
         bibliotecaView = new BibliotecaView(bookService);
     }
 
@@ -37,8 +40,26 @@ public class BibliotecaViewTest {
     }
 
     @Test
-    public void shouldShowMenu(){
-        List<String> menuOptions = Arrays.asList("Please select an option:", "1. List of Books");
-        assertThat(menuOptions, is(bibliotecaView.showMenuOptions()));
+    public void shouldShowInvalidOption(){
+        String invalidOptionMessage = "Please select a valid option!";
+        assertEquals(invalidOptionMessage, bibliotecaView.showInvalidOption());
+    }
+
+    @Test
+    public void shouldQuitBiblioteca(){
+        String quitMessage = "Bye bye!";
+        assertEquals(quitMessage, bibliotecaView.quitBiblioteca());
+    }
+
+    @Test
+    public void shouldShowSuccessCheckoutMessage(){
+        String successCheckout = "Thank you! Enjoy the book.";
+        assertEquals(successCheckout, bibliotecaView.showSuccessCheckoutMessage());
+    }
+
+    @Test
+    public void shouldShowInvalidCheckoutMessage(){
+        String invalidheckout = "Sorry, that book is not available.";
+        assertEquals(invalidheckout, bibliotecaView.showInvalidCheckoutMessage());
     }
 }
