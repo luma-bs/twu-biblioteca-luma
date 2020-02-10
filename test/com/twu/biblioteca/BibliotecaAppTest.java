@@ -21,7 +21,7 @@ public class BibliotecaAppTest {
     public void shouldCallFistMenuOption(){
         bibliotecaApp.selectMenuOption(1);
 
-        verify(bibliotecaView, times(1)).showBooks();
+        verify(bibliotecaView, times(1)).showAvailableBooks();
     }
 
     @Test

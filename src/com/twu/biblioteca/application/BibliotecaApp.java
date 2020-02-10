@@ -1,7 +1,5 @@
 package com.twu.biblioteca.application;
 
-import com.twu.biblioteca.repository.BookRepository;
-import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.view.BibliotecaView;
 
 import java.util.Scanner;
@@ -35,12 +33,18 @@ public class BibliotecaApp {
     public void selectMenuOption(int option){
         switch (option){
             case 0: System.out.println(bibliotecaView.quitBiblioteca());
-                break;
-            case 1: bibliotecaView.showBooks().forEach(book -> System.out.println(book));
+                    break;
+            case 1: bibliotecaView.showAvailableBooks().forEach(book -> System.out.println(book));
                     break;
             case 2: bibliotecaView.checkoutBook();
                     break;
             case 3: bibliotecaView.returnBook();
+                    break;
+            case 4: bibliotecaView.showAvailableMovies().forEach(movie -> System.out.println(movie));
+                    break;
+            case 5: bibliotecaView.checkoutMovie();
+                    break;
+            case 6: bibliotecaView.returnMovie();
                     break;
             default: System.out.println(bibliotecaView.showInvalidOption());
                     break;

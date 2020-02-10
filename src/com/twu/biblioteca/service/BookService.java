@@ -27,14 +27,14 @@ public class BookService {
     }
 
     public Book checkoutBook(String bookName){
-        Book checkoutedBook = getAllAvailableBooks().stream()
+        Book checkedOutBook = getAllAvailableBooks().stream()
                 .filter(book -> book.title.equals(bookName))
                 .findAny()
                 .orElse(null);
 
-        if(checkoutedBook != null) checkoutedBook = bookRepository.toggleCheckout(checkoutedBook);
+        if(checkedOutBook != null) checkedOutBook = bookRepository.toggleCheckout(checkedOutBook);
 
-        return checkoutedBook;
+        return checkedOutBook;
     }
 
     public List<Book> getAllBooksCheckedOut(){
