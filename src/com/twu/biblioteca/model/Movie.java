@@ -11,6 +11,7 @@ public class Movie {
     public boolean isCheckedOut;
 
     public Movie(String name, String year, String director, int rating, boolean isCheckedOut) {
+        count++;
         this.name = name;
         this.year = year;
         this.director = director;

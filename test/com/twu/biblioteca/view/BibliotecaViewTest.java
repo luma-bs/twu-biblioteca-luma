@@ -10,6 +10,7 @@ import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,12 +23,14 @@ public class BibliotecaViewTest {
     private BibliotecaView bibliotecaView;
     private BookService bookService;
     private MovieService movieService;
+    private UserService userService;
 
     @Before
     public  void setup() {
         bookService = mock(BookService.class);
         movieService = mock(MovieService.class);
-        bibliotecaView = new BibliotecaView(bookService, movieService);
+        userService = mock(UserService.class);
+        bibliotecaView = new BibliotecaView(bookService, movieService, userService);
     }
 
     @Test

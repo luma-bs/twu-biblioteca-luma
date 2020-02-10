@@ -5,7 +5,7 @@ import com.twu.biblioteca.repository.UserRepository;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -29,5 +29,22 @@ public class UserServiceTest {
         when(userRepository.userVerify(libraryNumber,password)).thenReturn(user);
 
         assertNotNull(userService.login(libraryNumber,password));
+    }
+
+    @Test
+    public void shouldReturnTrueWhenUserIsLogged(){
+        String libraryNumber = "123-1234";
+        String password = "password";
+        User user = new User(libraryNumber, password);
+
+        when(userRepository.userVerify(libraryNumber,password)).thenReturn(user);
+        userService.login(libraryNumber,password);
+
+        assertTrue(userService.isLogged());
+    }
+
+    @Test
+    public void shouldReturnFalseWhenUserIsLogged(){
+        assertFalse(userService.isLogged());
     }
 }

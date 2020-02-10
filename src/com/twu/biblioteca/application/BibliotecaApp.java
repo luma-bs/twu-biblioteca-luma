@@ -1,5 +1,6 @@
 package com.twu.biblioteca.application;
 
+import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.view.BibliotecaView;
 
 import java.util.Scanner;
@@ -45,6 +46,8 @@ public class BibliotecaApp {
             case 5: bibliotecaView.checkoutMovie();
                     break;
             case 6: bibliotecaView.returnMovie();
+                    break;
+            case 7: bibliotecaView.login();
                     break;
             default: System.out.println(bibliotecaView.showInvalidOption());
                     break;

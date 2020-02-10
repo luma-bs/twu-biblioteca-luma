@@ -2,8 +2,10 @@ package com.twu.biblioteca.view;
 
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Movie;
+import com.twu.biblioteca.model.User;
 import com.twu.biblioteca.service.BookService;
 import com.twu.biblioteca.service.MovieService;
+import com.twu.biblioteca.service.UserService;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -14,10 +16,12 @@ public class BibliotecaView {
 
     private BookService bookService;
     private MovieService movieService;
+    private UserService userService;
 
-    public BibliotecaView(BookService bookService, MovieService movieService){
+    public BibliotecaView(BookService bookService, MovieService movieService, UserService userService){
         this.bookService = bookService;
         this.movieService = movieService;
+        this.userService = userService;
     }
 
     public String showWelcomeMessage(){
@@ -34,6 +38,7 @@ public class BibliotecaView {
         menuOptions.add("4. List of Movies");
         menuOptions.add("5. Checkout a movie");
         menuOptions.add("6. Return a movie");
+        menuOptions.add("7. Login");
         menuOptions.add("0. Quit");
 
         return menuOptions;
@@ -67,6 +72,8 @@ public class BibliotecaView {
     public void checkoutBook(){
         Book book = null;
 
+        if (!userService.isLogged()) login();
+
         do {
             System.out.println("Please enter the valid name of the book you want to checkout");
 
@@ -92,6 +99,8 @@ public class BibliotecaView {
 
     public void returnBook(){
         Book book = null;
+
+        if (!userService.isLogged()) login();
 
         do {
             System.out.println("Please enter the valid name of the book you want to return");
@@ -127,6 +136,8 @@ public class BibliotecaView {
     public void checkoutMovie(){
         Movie movie = null;
 
+        if (!userService.isLogged()) login();
+
         do {
             System.out.println("Please enter the valid name of the movie you want to checkout");
 
@@ -153,6 +164,8 @@ public class BibliotecaView {
     public void returnMovie(){
         Movie movie = null;
 
+        if (!userService.isLogged()) login();
+
         do {
             System.out.println("Please enter the valid name of the movie you want to return");
 
@@ -165,5 +178,24 @@ public class BibliotecaView {
         }while(movie == null);
 
         System.out.println(showSuccessfulReturnMovieMessage());
+    }
+
+    public void login(){
+        User user = null;
+
+        do {
+            System.out.println("Please enter your library number:");
+
+            Scanner scanner = new Scanner(System.in);
+            String libraryNumber = scanner.nextLine();
+
+            System.out.println("Please enter your password:");
+            String password = scanner.nextLine();
+
+            user = userService.login(libraryNumber,password);
+
+            if(user == null) System.out.println("Invalid login. Please try again");
+
+        }while(user == null);
     }
 }
