@@ -105,8 +105,9 @@ public class BibliotecaView {
 
     public void returnBook(){
         Book book = null;
+        User user = userService.get();
 
-        //if (!userService.isLogged()) login();
+        if (user == null) user = login();
 
         do {
             System.out.println("Please enter the valid name of the book you want to return");
@@ -114,10 +115,13 @@ public class BibliotecaView {
             Scanner scanner = new Scanner(System.in);
             String bookName = scanner.nextLine();
 
-            //book = bookService.returnBook(bookName);
+            book = bookService.get(bookName);
 
             if(book == null) System.out.println(showInvalidBookReturnMessage());
+
         }while(book == null);
+
+        checkoutBookService.returnBook(book, user);
 
         System.out.println(showSuccessfulReturnMessage());
     }

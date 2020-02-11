@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class CheckoutBookServiceTest {
@@ -31,5 +32,18 @@ public class CheckoutBookServiceTest {
         CheckoutBook actual = checkoutBookService.checkoutBook(book, user);
 
         assertEquals(checkoutBook, actual);
+    }
+
+    @Test
+    public void shouldReturnBook(){
+        Book book = new Book("Test","Dev", "2020");
+        User user = new User("123-1234", "password");
+        CheckoutBook checkoutBook = new CheckoutBook(1,1,true);
+
+        when(checkoutBookRepository.toggleCheckout(1,1)).thenReturn(checkoutBook);
+
+        CheckoutBook actual = checkoutBookService.returnBook(book, user);
+
+        assertTrue(actual.hasReturned);
     }
 }

@@ -16,4 +16,8 @@ public class CheckoutBookService {
         if (checkoutBookRepository.isCheckedOut(book.id)) return null;
         return checkoutBookRepository.addCheckout(book.id, user.id);
     }
+
+    public CheckoutBook returnBook(Book book, User user){
+        return checkoutBookRepository.toggleCheckout(book.id,user.id);
+    }
 }

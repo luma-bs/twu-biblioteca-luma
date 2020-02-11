@@ -51,4 +51,32 @@ public class BibliotecaAppTest {
 
         verify(bibliotecaView, times(1)).returnBook();;
     }
+
+    @Test
+    public void shouldShowAllMoviesAvailable(){
+        bibliotecaApp.selectMenuOption(4);
+
+        verify(bibliotecaView, times(1)).showAvailableMovies();;
+    }
+
+    @Test
+    public void shouldCheckouAMovie(){
+        bibliotecaApp.selectMenuOption(5);
+
+        verify(bibliotecaView, times(1)).checkoutMovie();;
+    }
+
+    @Test
+    public void shouldReturnAMovie(){
+        bibliotecaApp.selectMenuOption(6);
+
+        verify(bibliotecaView, times(1)).returnMovie();;
+    }
+
+    @Test
+    public void shouldLoginAUser(){
+        bibliotecaApp.selectMenuOption(7);
+
+        verify(bibliotecaView, times(1)).login();;
+    }
 }
