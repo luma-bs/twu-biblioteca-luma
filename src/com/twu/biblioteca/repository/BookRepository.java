@@ -17,4 +17,8 @@ public class BookRepository {
     public List<Book> getAll(){
         return books;
     }
+
+    public Book get (String bookName){
+       return books.stream().filter(book -> book.title.equals(bookName)).findAny().orElse(null);
+    }
 }

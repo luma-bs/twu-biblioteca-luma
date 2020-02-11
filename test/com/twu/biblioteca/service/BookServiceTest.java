@@ -42,4 +42,13 @@ public class BookServiceTest {
         assertFalse(actual.isEmpty());
         assertFalse(actual.contains(checkedOutBook));
     }
+
+    @Test
+    public void shouldGetBookByName(){
+        Book book = new Book("Twilight", "Stephani Meyer", "2001");
+
+        when(bookRepository.get("Twilight")).thenReturn(book);
+
+        assertEquals(book, bookService.get("Twilight"));
+    }
 }

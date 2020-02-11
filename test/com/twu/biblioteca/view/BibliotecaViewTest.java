@@ -9,6 +9,7 @@ import static org.mockito.Mockito.when;
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.service.BookService;
+import com.twu.biblioteca.service.CheckoutBookService;
 import com.twu.biblioteca.service.MovieService;
 import com.twu.biblioteca.service.UserService;
 import org.junit.Before;
@@ -24,13 +25,15 @@ public class BibliotecaViewTest {
     private BookService bookService;
     private MovieService movieService;
     private UserService userService;
+    private CheckoutBookService checkoutBookService;
 
     @Before
     public  void setup() {
         bookService = mock(BookService.class);
         movieService = mock(MovieService.class);
         userService = mock(UserService.class);
-        bibliotecaView = new BibliotecaView(bookService, movieService, userService);
+        checkoutBookService = mock(CheckoutBookService.class);
+        bibliotecaView = new BibliotecaView(bookService, movieService, userService, checkoutBookService);
     }
 
     @Test

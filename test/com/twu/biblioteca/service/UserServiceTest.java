@@ -32,7 +32,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void shouldReturnTrueWhenUserIsLogged(){
+    public void shouldReturnUserWhenUserIsLogged(){
         String libraryNumber = "123-1234";
         String password = "password";
         User user = new User(libraryNumber, password);
@@ -40,11 +40,11 @@ public class UserServiceTest {
         when(userRepository.userVerify(libraryNumber,password)).thenReturn(user);
         userService.login(libraryNumber,password);
 
-        assertTrue(userService.isLogged());
+        assertEquals(user, userService.get());
     }
 
     @Test
-    public void shouldReturnFalseWhenUserIsLogged(){
-        assertFalse(userService.isLogged());
+    public void shouldReturnNullWhenUserIsNotLogged(){
+        assertNull(userService.get());
     }
 }

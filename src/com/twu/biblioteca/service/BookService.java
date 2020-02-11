@@ -30,4 +30,8 @@ public class BookService {
 
         return availableBooks;
     }
+
+    public Book get(String bookName){
+        return bookRepository.get(bookName);
+    }
 }

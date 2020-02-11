@@ -17,7 +17,7 @@ public class UserService {
         return user;
     }
 
-    public boolean isLogged(){
-        return this.user != null;
+    public User get(){
+        return this.user;
     }
 }
