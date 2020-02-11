@@ -2,6 +2,7 @@ package com.twu.biblioteca.service;
 
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Movie;
+import com.twu.biblioteca.repository.CheckoutMovieRepository;
 import com.twu.biblioteca.repository.MovieRepository;
 
 import java.util.ArrayList;
@@ -9,16 +10,19 @@ import java.util.List;
 
 public class MovieService {
     private MovieRepository movieRepository;
+    private CheckoutMovieRepository checkoutMovieRepository;
 
-    public MovieService(MovieRepository movieRepository) {
+    public MovieService(MovieRepository movieRepository, CheckoutMovieRepository checkoutMovieRepository) {
         this.movieRepository = movieRepository;
+        this.checkoutMovieRepository = checkoutMovieRepository;
     }
 
     public List<Movie> getAllAvailableMovies(){
         List<Movie> availableMovies = new ArrayList<Movie>();
 
         movieRepository.getAll().forEach(movie -> {
-            if(!movie.isCheckedOut){
+            boolean isCheckedOut = checkoutMovieRepository.isCheckedOut(movie.id);
+            if(!isCheckedOut){
                 availableMovies.add(movie);
             }
         });
@@ -26,37 +30,7 @@ public class MovieService {
         return availableMovies;
     }
 
-    public Movie checkoutMovie(String movieName){
-        Movie checkedOutMovie = getAllAvailableMovies().stream()
-                .filter(movie -> movie.name.equals(movieName))
-                .findAny()
-                .orElse(null);
-
-        if(checkedOutMovie != null) checkedOutMovie = movieRepository.toggleCheckout(checkedOutMovie);
-
-        return checkedOutMovie;
-    }
-
-    public List<Movie> getAllMoviesCheckedOut(){
-        List<Movie> checkedOutMovies = new ArrayList<Movie>();
-
-        movieRepository.getAll().forEach(movie -> {
-            if(movie.isCheckedOut){
-                checkedOutMovies.add(movie);
-            }
-        });
-
-        return checkedOutMovies;
-    }
-
-    public Movie returnMovie(String movieName){
-        Movie checkedOutMovie = getAllMoviesCheckedOut().stream()
-                .filter(movie -> movie.name.equals(movieName))
-                .findAny()
-                .orElse(null);
-
-        if(checkedOutMovie != null) checkedOutMovie = movieRepository.toggleCheckout(checkedOutMovie);
-
-        return checkedOutMovie;
+    public Movie get(String movieName){
+        return movieRepository.get(movieName);
     }
 }

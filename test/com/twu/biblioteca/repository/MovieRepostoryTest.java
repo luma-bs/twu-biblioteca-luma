@@ -5,7 +5,7 @@ import com.twu.biblioteca.model.Movie;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class MovieRepostoryTest {
     private MovieRepository movieRepostory;
@@ -21,11 +21,15 @@ public class MovieRepostoryTest {
     }
 
     @Test
-    public void shouldChangeCheckoutStatus(){
-        Movie movie = new Movie("Joker", "2019", "Todd Phillips", 5, true);
+    public void shouldReturnMovieByName(){
+        String moviName = "Joker";
 
-        movie = movieRepostory.toggleCheckout(movie);
+        assertNotNull(movieRepostory.get(moviName));
+    }
 
-        assertFalse(movie.isCheckedOut);
+    @Test
+    public void shouldReturnNullWhenMovieNameNotFound(){
+        String movieName = "Test";
+        assertNull(movieRepostory.get(movieName));
     }
 }

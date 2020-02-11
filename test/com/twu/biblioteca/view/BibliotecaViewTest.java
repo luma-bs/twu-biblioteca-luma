@@ -8,10 +8,7 @@ import static org.mockito.Mockito.when;
 
 import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.Movie;
-import com.twu.biblioteca.service.BookService;
-import com.twu.biblioteca.service.CheckoutBookService;
-import com.twu.biblioteca.service.MovieService;
-import com.twu.biblioteca.service.UserService;
+import com.twu.biblioteca.service.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,6 +23,7 @@ public class BibliotecaViewTest {
     private MovieService movieService;
     private UserService userService;
     private CheckoutBookService checkoutBookService;
+    private CheckoutMovieService checkoutMovieService;
 
     @Before
     public  void setup() {
@@ -33,7 +31,8 @@ public class BibliotecaViewTest {
         movieService = mock(MovieService.class);
         userService = mock(UserService.class);
         checkoutBookService = mock(CheckoutBookService.class);
-        bibliotecaView = new BibliotecaView(bookService, movieService, userService, checkoutBookService);
+        checkoutMovieService = mock(CheckoutMovieService.class);
+        bibliotecaView = new BibliotecaView(bookService, movieService, userService, checkoutBookService, checkoutMovieService);
     }
 
     @Test
@@ -95,8 +94,8 @@ public class BibliotecaViewTest {
     @Test
     public void shouldShowMovies(){
         List<Movie> alLMovies = new ArrayList<Movie>();
-        alLMovies.add(new Movie("Joker", "2019", "Todd Phillips", 5, false));
-        alLMovies.add(new Movie("LALALAND", "2017", "Damien Chazelle", 5,false));
+        alLMovies.add(new Movie("Joker", "2019", "Todd Phillips", 5));
+        alLMovies.add(new Movie("LALALAND", "2017", "Damien Chazelle", 5));
 
         List<String> expectedResult = Arrays.asList("Name: Joker | Year: 2019 | Director: Todd Phillips | Rating: 5",
                 "Name: LALALAND | Year: 2017 | Director: Damien Chazelle | Rating: 5");

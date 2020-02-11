@@ -8,15 +8,13 @@ public class Movie {
     public String year;
     public String director;
     public int rating;
-    public boolean isCheckedOut;
 
-    public Movie(String name, String year, String director, int rating, boolean isCheckedOut) {
+    public Movie(String name, String year, String director, int rating) {
         count++;
         this.name = name;
         this.year = year;
         this.director = director;
         this.rating = rating;
-        this.isCheckedOut = isCheckedOut;
         this.id = count;
     }
 }
