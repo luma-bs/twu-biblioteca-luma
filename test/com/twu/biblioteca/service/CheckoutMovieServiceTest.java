@@ -25,7 +25,7 @@ public class CheckoutMovieServiceTest {
     @Test
     public void shouldCheckoutMovie(){
         Movie movie = new Movie("Joker", "2019", "Todd Phillips", 5);
-        User user = new User("123-1234", "senha");
+        User user = new User("123-1234", "senha","Stephano", "stephano@gmail.com", "999999999");
 
         CheckoutMovie checkoutMovie = new CheckoutMovie(1,1,false);
 
@@ -39,7 +39,7 @@ public class CheckoutMovieServiceTest {
     @Test
     public void shouldReturnMovie(){
         Movie movie = new Movie("Joker", "2019", "Todd Phillips", 5);
-        User user = new User("123-1234", "password");
+        User user = new User("123-1234", "password","Stephano", "stephano@gmail.com", "999999999");
         CheckoutMovie checkoutMovie = new CheckoutMovie(1,1,true);
 
         when(checkoutMovieRepository.toggleCheckout(1,1)).thenReturn(checkoutMovie);

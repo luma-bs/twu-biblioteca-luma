@@ -24,7 +24,7 @@ public class UserServiceTest {
         String libraryNumber = "123-1234";
         String password = "password";
 
-        User user = new User(libraryNumber, password);
+        User user = new User(libraryNumber, password, "Stephano", "stephano@gmail.com", "999999999");
 
         when(userRepository.userVerify(libraryNumber,password)).thenReturn(user);
 
@@ -35,7 +35,7 @@ public class UserServiceTest {
     public void shouldReturnUserWhenUserIsLogged(){
         String libraryNumber = "123-1234";
         String password = "password";
-        User user = new User(libraryNumber, password);
+        User user = new User(libraryNumber, password,"Stephano", "stephano@gmail.com", "999999999");
 
         when(userRepository.userVerify(libraryNumber,password)).thenReturn(user);
         userService.login(libraryNumber,password);

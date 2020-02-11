@@ -41,6 +41,7 @@ public class BibliotecaView {
         menuOptions.add("5. Checkout a movie");
         menuOptions.add("6. Return a movie");
         menuOptions.add("7. Login");
+        menuOptions.add("8. Profile");
         menuOptions.add("0. Quit");
 
         return menuOptions;
@@ -213,5 +214,13 @@ public class BibliotecaView {
         }while(user == null);
 
         return user;
+    }
+
+    public String showProfile(){
+        User user = userService.get();
+
+        if (user == null) user = login();
+
+        return MessageFormat.format("Name: {0} | Email: {1} | PhoneNumber: {2}", user.name, user.email, user.phoneNumber);
     }
 }

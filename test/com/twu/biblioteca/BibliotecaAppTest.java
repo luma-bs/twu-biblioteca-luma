@@ -79,4 +79,11 @@ public class BibliotecaAppTest {
 
         verify(bibliotecaView, times(1)).login();;
     }
+
+    @Test
+    public void shouldShowUserProfile(){
+        bibliotecaApp.selectMenuOption(8);
+
+        verify(bibliotecaView, times(1)).showProfile();;
+    }
 }

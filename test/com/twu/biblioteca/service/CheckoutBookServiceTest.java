@@ -24,7 +24,7 @@ public class CheckoutBookServiceTest {
     @Test
     public void shouldCheckoutBook(){
         Book book = new Book("Test","Dev", "2020");
-        User user = new User("123-1234", "password");
+        User user = new User("123-1234", "password","Stephano", "stephano@gmail.com", "999999999");
         CheckoutBook checkoutBook = new CheckoutBook(1,1,false);
 
         when(checkoutBookRepository.addCheckout(1,1)).thenReturn(checkoutBook);
@@ -37,7 +37,7 @@ public class CheckoutBookServiceTest {
     @Test
     public void shouldReturnBook(){
         Book book = new Book("Test","Dev", "2020");
-        User user = new User("123-1234", "password");
+        User user = new User("123-1234", "password","Stephano", "stephano@gmail.com", "999999999");
         CheckoutBook checkoutBook = new CheckoutBook(1,1,true);
 
         when(checkoutBookRepository.toggleCheckout(1,1)).thenReturn(checkoutBook);

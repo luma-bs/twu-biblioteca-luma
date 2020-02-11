@@ -49,6 +49,8 @@ public class BibliotecaApp {
                     break;
             case 7: bibliotecaView.login();
                     break;
+            case 8: System.out.println(bibliotecaView.showProfile());
+                    break;
             default: System.out.println(bibliotecaView.showInvalidOption());
                     break;
         }

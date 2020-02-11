@@ -9,8 +9,8 @@ public class UserRepository {
     private List<User> users = new ArrayList<User>();
 
     public UserRepository() {
-        this.users.add(new User("123-1234", "senha"));
-        this.users.add(new User("010-1010", "password"));
+        this.users.add(new User("123-1234", "senha", "Stephano", "stephano@gmail.com", "999999999"));
+        this.users.add(new User("010-1010", "password","Camila", "camila@gmail.com", "888888888"));
     }
 
     public List<User> getAll(){return users;}
