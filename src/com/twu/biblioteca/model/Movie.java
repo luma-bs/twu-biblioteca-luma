@@ -3,7 +3,7 @@ package com.twu.biblioteca.model;
 public class Movie {
     public static int count = 0;
 
-    private int id;
+    public int id;
     public String name;
     public String year;
     public String director;

@@ -42,8 +42,8 @@ public class BibliotecaViewTest {
     @Test
     public void shouldShowBooks(){
         List<Book> allBooks = new ArrayList<Book>();
-        allBooks.add(new Book("Harry Potter and the Chamber of Secrets", "J. K. Rolling", "1997", false));
-        allBooks.add(new Book("Twilight", "Stephani Meyer", "2001", false));
+        allBooks.add(new Book("Harry Potter and the Chamber of Secrets", "J. K. Rolling", "1997"));
+        allBooks.add(new Book("Twilight", "Stephani Meyer", "2001"));
 
         List<String> booksMessage = Arrays.asList("Title: Harry Potter and the Chamber of Secrets | Author: J. K. Rolling | Publication Year: 1997",
                 "Title: Twilight | Author: Stephani Meyer | Publication Year: 2001");

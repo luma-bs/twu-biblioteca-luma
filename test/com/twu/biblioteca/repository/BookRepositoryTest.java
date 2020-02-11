@@ -18,13 +18,4 @@ public class BookRepositoryTest {
     public void shouldGetAllBooks() {
         assertFalse(bookRepository.getAll().isEmpty());
     }
-
-    @Test
-    public void shouldChangeCheckoutStatus(){
-        Book book = new Book("Twilight", "Stephani Meyer", "2001", true);
-
-        book = bookRepository.toggleCheckout(book);
-
-        assertFalse(book.isCheckedOut);
-    }
 }

@@ -1,7 +1,9 @@
 package com.twu.biblioteca.service;
 
+import com.twu.biblioteca.model.CheckoutBook;
 import com.twu.biblioteca.repository.BookRepository;
 import com.twu.biblioteca.model.Book;
+import com.twu.biblioteca.repository.CheckoutBookRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,54 +11,23 @@ import java.util.List;
 public class BookService {
 
     private BookRepository bookRepository;
+    private CheckoutBookRepository checkoutBookRepository;
 
-    public BookService(BookRepository bookRepository){
+    public BookService(BookRepository bookRepository, CheckoutBookRepository checkoutBookRepository){
         this.bookRepository = bookRepository;
+        this.checkoutBookRepository = checkoutBookRepository;
     }
 
     public List<Book> getAllAvailableBooks(){
         List<Book> availableBooks = new ArrayList<Book>();
 
         bookRepository.getAll().forEach(book -> {
-            if(!book.isCheckedOut){
+            boolean isCheckedOut = checkoutBookRepository.isCheckedOut(book.id);
+            if(!isCheckedOut){
                 availableBooks.add(book);
             }
         });
 
         return availableBooks;
-    }
-
-    public Book checkoutBook(String bookName){
-        Book checkedOutBook = getAllAvailableBooks().stream()
-                .filter(book -> book.title.equals(bookName))
-                .findAny()
-                .orElse(null);
-
-        if(checkedOutBook != null) checkedOutBook = bookRepository.toggleCheckout(checkedOutBook);
-
-        return checkedOutBook;
-    }
-
-    public List<Book> getAllBooksCheckedOut(){
-        List<Book> checkedOutBooks = new ArrayList<Book>();
-
-        bookRepository.getAll().forEach(book -> {
-            if(book.isCheckedOut){
-                checkedOutBooks.add(book);
-            }
-        });
-
-        return checkedOutBooks;
-    }
-
-    public Book returnBook(String bookName){
-        Book checkoutedBook = getAllBooksCheckedOut().stream()
-                .filter(book -> book.title.equals(bookName))
-                .findAny()
-                .orElse(null);
-
-        if(checkoutedBook != null) checkoutedBook = bookRepository.toggleCheckout(checkoutedBook);
-
-        return checkoutedBook;
     }
 }

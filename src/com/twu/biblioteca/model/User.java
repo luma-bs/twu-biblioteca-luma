@@ -4,7 +4,7 @@ public class User {
 
     public static int count = 0;
 
-    private int id;
+    public int id;
     public String libraryNumber;
     public String password;
 

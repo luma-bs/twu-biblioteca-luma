@@ -1,7 +1,9 @@
 package com.twu.biblioteca;
 
 import com.twu.biblioteca.application.BibliotecaApp;
+import com.twu.biblioteca.model.CheckoutBook;
 import com.twu.biblioteca.repository.BookRepository;
+import com.twu.biblioteca.repository.CheckoutBookRepository;
 import com.twu.biblioteca.repository.MovieRepository;
 import com.twu.biblioteca.repository.UserRepository;
 import com.twu.biblioteca.service.BookService;
@@ -13,7 +15,8 @@ public class BibliotecaMain {
 
     public static void main(String[] args) {
         BookRepository bookRepository  = new BookRepository();
-        BookService bookService = new BookService(bookRepository);
+        CheckoutBookRepository checkoutBook = new CheckoutBookRepository();
+        BookService bookService = new BookService(bookRepository, checkoutBook);
         MovieRepository movieRepository = new MovieRepository();
         MovieService movieService = new MovieService(movieRepository);
         UserRepository userRepository = new UserRepository();

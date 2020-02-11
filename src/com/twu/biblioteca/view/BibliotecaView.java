@@ -80,7 +80,7 @@ public class BibliotecaView {
             Scanner scanner = new Scanner(System.in);
             String bookName = scanner.nextLine();
 
-            book = bookService.checkoutBook(bookName);
+            //book = bookService.checkoutBook(bookName);
 
             if (book == null) System.out.println(showInvalidCheckoutBookMessage());
 
@@ -108,7 +108,7 @@ public class BibliotecaView {
             Scanner scanner = new Scanner(System.in);
             String bookName = scanner.nextLine();
 
-            book = bookService.returnBook(bookName);
+            //book = bookService.returnBook(bookName);
 
             if(book == null) System.out.println(showInvalidBookReturnMessage());
         }while(book == null);
