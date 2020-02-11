@@ -43,13 +43,4 @@ public class CheckoutBookRepositoryTest {
 
         assertTrue(checkoutBookRepository.isCheckedOut(bookId));
     }
-
-    @Test
-    public void shouldVerifyBookStatusWhenABookIsCheckedIn(){
-        int bookId = 1;
-        int userId = 1;
-        CheckoutBook checkoutBook = new CheckoutBook(bookId,userId,false);
-
-        assertFalse(checkoutBookRepository.isCheckedOut(bookId));
-    }
 }

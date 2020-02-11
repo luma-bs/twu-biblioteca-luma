@@ -18,7 +18,7 @@ public class CheckoutBookRepository {
 
     public CheckoutBook addCheckout(int bookId, int userId){
         CheckoutBook checkoutBook = new CheckoutBook(bookId, userId, false);
-        checkoutBookList.add(checkoutBook);
+        this.checkoutBookList.add(checkoutBook);
         return checkoutBook;
     }
 
@@ -35,6 +35,6 @@ public class CheckoutBookRepository {
     }
 
     public boolean isCheckedOut(int bookId){
-        return checkoutBookList.stream().anyMatch(checkoutBook -> checkoutBook.bookId == bookId && !checkoutBook.hasReturned);
+        return this.checkoutBookList.stream().anyMatch(checkoutBook -> checkoutBook.bookId == bookId && !checkoutBook.hasReturned);
     }
 }
