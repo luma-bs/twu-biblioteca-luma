@@ -41,7 +41,8 @@ public class BibliotecaView {
         menuOptions.add("5. Checkout a movie");
         menuOptions.add("6. Return a movie");
         menuOptions.add("7. Login");
-        menuOptions.add("8. Profile");
+        menuOptions.add("8. Checkout Report");
+        menuOptions.add("9. Profile");
         menuOptions.add("0. Quit");
 
         return menuOptions;
@@ -84,7 +85,7 @@ public class BibliotecaView {
             Scanner scanner = new Scanner(System.in);
             String bookName = scanner.nextLine();
 
-            book = bookService.get(bookName);
+            book = bookService.getAvailableBook(bookName);
             if (book == null) System.out.println(showInvalidCheckoutBookMessage());
 
         }while(book == null);
@@ -114,7 +115,7 @@ public class BibliotecaView {
             Scanner scanner = new Scanner(System.in);
             String bookName = scanner.nextLine();
 
-            book = bookService.get(bookName);
+            book = bookService.getCheckedOutBook(bookName);
 
             if(book == null) System.out.println(showInvalidBookReturnMessage());
 
@@ -154,7 +155,7 @@ public class BibliotecaView {
             Scanner scanner = new Scanner(System.in);
             String movieName = scanner.nextLine();
 
-            movie = movieService.get(movieName);
+            movie = movieService.getAvailableMovie(movieName);
 
             if (movie == null) System.out.println(showInvalidCheckoutMovieMessage());
 
@@ -185,7 +186,7 @@ public class BibliotecaView {
             Scanner scanner = new Scanner(System.in);
             String movieName = scanner.nextLine();
 
-            movie = movieService.get(movieName);
+            movie = movieService.getCheckedOutMovie(movieName);
 
             if(movie == null) System.out.println(showInvalidBookReturnMovieMessage());
         }while(movie == null);
@@ -214,6 +215,36 @@ public class BibliotecaView {
         }while(user == null);
 
         return user;
+    }
+
+    public List<String> showCheckoutReport(){
+        List<String> checkouts = new ArrayList<String>();
+
+        if (userService.get() == null) login();
+
+        checkoutBookService.getAll().forEach(bookCheckout -> {
+            String bookName = bookService.getById(bookCheckout.bookId).title;
+            String userName = userService.getById(bookCheckout.userId).name;
+            String checkoutStatus = "Pendent";
+
+            if(bookCheckout.hasReturned) checkoutStatus = "Returned";
+
+            checkouts.add(MessageFormat
+                    .format("Book: {0} | Customer: {1} | Status: {2}", bookName, userName, checkoutStatus));
+        });
+
+        checkoutMovieService.getAll().forEach(movieCheckout -> {
+            String movieName = movieService.getById(movieCheckout.movieId).name;
+            String userName = userService.getById(movieCheckout.userId).name;
+            String checkoutStatus = "Pendent";
+
+            if(movieCheckout.hasReturned) checkoutStatus = "Returned";
+
+            checkouts.add(MessageFormat
+                    .format("Movie: {0} | Customer: {1} | Status: {2}", movieName, userName, checkoutStatus));
+        });
+
+        return checkouts;
     }
 
     public String showProfile(){

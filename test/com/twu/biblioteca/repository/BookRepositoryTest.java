@@ -18,17 +18,4 @@ public class BookRepositoryTest {
     public void shouldGetAllBooks() {
         assertFalse(bookRepository.getAll().isEmpty());
     }
-
-    @Test
-    public void shouldReturnBookByName(){
-        String bookName = "Throne of Glass";
-
-        assertNotNull(bookRepository.get(bookName));
-    }
-
-    @Test
-    public void shouldReturnNullWhenBookNameNotFound(){
-        String bookName = "Test";
-        assertNull(bookRepository.get(bookName));
-    }
 }

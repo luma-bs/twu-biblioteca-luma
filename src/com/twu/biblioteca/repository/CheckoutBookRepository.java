@@ -1,8 +1,6 @@
 package com.twu.biblioteca.repository;
 
-import com.twu.biblioteca.model.Book;
 import com.twu.biblioteca.model.CheckoutBook;
-import com.twu.biblioteca.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

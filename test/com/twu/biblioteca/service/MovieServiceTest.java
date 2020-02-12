@@ -42,13 +42,4 @@ public class MovieServiceTest {
         assertNotNull(actual);
         assertFalse(actual.contains(checkedOutMovie));
     }
-
-    @Test
-    public void shouldGetMovieByName(){
-        Movie movie = new Movie("Joker", "2019", "Todd Phillips", 5);
-
-        when(movieRepository.get("Joker")).thenReturn(movie);
-
-        assertEquals(movie, movieService.get("Joker"));
-    }
 }

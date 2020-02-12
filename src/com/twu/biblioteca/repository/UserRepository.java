@@ -1,5 +1,6 @@
 package com.twu.biblioteca.repository;
 
+import com.twu.biblioteca.model.Movie;
 import com.twu.biblioteca.model.User;
 
 import java.util.ArrayList;
@@ -14,6 +15,10 @@ public class UserRepository {
     }
 
     public List<User> getAll(){return users;}
+
+    public User get(int userId){
+        return this.users.stream().filter(user -> user.id == userId).findAny().orElse(null);
+    }
 
     public User userVerify(String libraryNumber, String password){
         return users.stream()

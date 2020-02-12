@@ -17,6 +17,10 @@ public class MovieService {
         this.checkoutMovieRepository = checkoutMovieRepository;
     }
 
+    public Movie getById(int movieId){
+        return movieRepository.get(movieId);
+    }
+
     public List<Movie> getAllAvailableMovies(){
         List<Movie> availableMovies = new ArrayList<Movie>();
 
@@ -30,7 +34,23 @@ public class MovieService {
         return availableMovies;
     }
 
-    public Movie get(String movieName){
-        return movieRepository.get(movieName);
+    public Movie getAvailableMovie(String movieName){
+        return getAllAvailableMovies().stream().filter(movie -> movie.name.equals(movieName)).findAny().orElse(null);
+    }
+    public List<Movie> getAllCheckedOutMovies(){
+        List<Movie> checkedOutMovies = new ArrayList<Movie>();
+
+        movieRepository.getAll().forEach(movie -> {
+            boolean isCheckedOut = checkoutMovieRepository.isCheckedOut(movie.id);
+            if(isCheckedOut){
+                checkedOutMovies.add(movie);
+            }
+        });
+
+        return checkedOutMovies;
+    }
+
+    public Movie getCheckedOutMovie(String movieName){
+        return getAllCheckedOutMovies().stream().filter(movie -> movie.name.equals(movieName)).findAny().orElse(null);
     }
 }

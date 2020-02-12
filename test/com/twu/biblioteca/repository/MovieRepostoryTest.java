@@ -20,16 +20,4 @@ public class MovieRepostoryTest {
         assertFalse(movieRepostory.getAll().isEmpty());
     }
 
-    @Test
-    public void shouldReturnMovieByName(){
-        String moviName = "Joker";
-
-        assertNotNull(movieRepostory.get(moviName));
-    }
-
-    @Test
-    public void shouldReturnNullWhenMovieNameNotFound(){
-        String movieName = "Test";
-        assertNull(movieRepostory.get(movieName));
-    }
 }

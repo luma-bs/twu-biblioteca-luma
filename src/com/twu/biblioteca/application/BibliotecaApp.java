@@ -49,7 +49,9 @@ public class BibliotecaApp {
                     break;
             case 7: bibliotecaView.login();
                     break;
-            case 8: System.out.println(bibliotecaView.showProfile());
+            case 8: bibliotecaView.showCheckoutReport().forEach(checkout -> System.out.println(checkout));
+                    break;
+            case 9: System.out.println(bibliotecaView.showProfile());
                     break;
             default: System.out.println(bibliotecaView.showInvalidOption());
                     break;

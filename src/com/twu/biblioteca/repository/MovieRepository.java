@@ -19,7 +19,7 @@ public class MovieRepository {
         return movies;
     }
 
-    public Movie get (String movieName){
-        return this.movies.stream().filter(movie -> movie.name.equals(movieName)).findAny().orElse(null);
+    public Movie get(int movieId){
+        return this.movies.stream().filter(movie -> movie.id == movieId).findAny().orElse(null);
     }
 }
